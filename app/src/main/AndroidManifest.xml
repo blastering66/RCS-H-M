@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="id.tech.hsmsjacket">
+
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_SMS" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/icon_holcim"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".Activity_Splashscreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Activity_PreHome" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity_Home" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Dialog_Input_MandorID" android:theme="@style/DialogTheme"></activity>
+        <activity android:name=".Dialog_Detail_Message" android:theme="@style/DialogTheme"></activity>
+        <activity android:name=".Activity_Inbox" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity_Register" android:screenOrientation="portrait"  ></activity>
+        <activity android:name=".Activity_Claim" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity_Insentif" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity_History" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity_History_Parent" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity_History_Tabpager" android:screenOrientation="portrait"></activity>
+        <activity android:name=".Activity_News" android:screenOrientation="portrait"></activity>
+
+        <service android:name="id.tech.hsmsjacket.StartSMSService" >
+        </service>
+
+        <receiver android:name="id.tech.hsmsjacket.BootCompletedReceiver"
+            android:enabled="true"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".SmsListener">
+            <intent-filter android:priority="2147483647">
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+            </intent-filter>
+        </receiver>
+
+        <meta-data android:name="DATABASE" android:value="sugar_sms.db" />
+        <meta-data android:name="VERSION" android:value="2" />
+        <meta-data android:name="QUERY_LOG" android:value="true" />
+        <meta-data android:name="DOMAIN_PACKAGE_NAME" android:value="id.tech.orm_sugar" />
+    </application>
+
+</manifest>

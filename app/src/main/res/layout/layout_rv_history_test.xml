@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+    <ToggleButton
+        android:id="@+id/btn_today"
+        android:textOn="Hari ini"
+        android:textOff="Hari ini"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv"
+        android:layout_below="@id/wrapper_top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:visibility="gone"
+        />
+
+    <ToggleButton
+        android:id="@+id/btn_yesterday"
+        android:textOn="Kemarin"
+        android:textOff="Kemarin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_yesterday"
+        android:layout_below="@id/wrapper_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        android:padding="10dp"
+        />
+
+    <ToggleButton
+        android:id="@+id/btn_else"
+        android:textOn="Lainnya"
+        android:textOff="Lainnya"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_else"
+        android:layout_below="@id/wrapper_top"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:visibility="gone"
+        />
+
+</LinearLayout>

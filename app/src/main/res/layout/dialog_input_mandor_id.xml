@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="300dp"
+    android:background="@color/dark_gray"
+    android:layout_height="wrap_content"
+    android:layout_centerInParent="true"
+    >
+
+    <LinearLayout
+        android:layout_centerInParent="true"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+
+        <EditText
+            android:id="@+id/ed_mandor_id"
+            android:hint="Masukan Mandor ID"
+            android:background="@color/white"
+            android:textColor="@color/black"
+            android:padding="10dp"
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:padding="5dp"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:id="@+id/btn_positive"
+                android:text="OK"
+                android:textColor="@color/white"
+                android:background="@drawable/selector_btn_inverted"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_negative"
+                android:text="Batal"
+                android:textColor="@color/white"
+                android:background="@drawable/selector_btn_inverted"
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</RelativeLayout>
