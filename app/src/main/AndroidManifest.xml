@@ -33,6 +33,7 @@
         <activity android:name=".Activity_History_Tabpager" android:screenOrientation="portrait"></activity>
         <activity android:name=".Activity_News" android:screenOrientation="portrait"></activity>
 
+        <!-- -->
         <service android:name="id.tech.hsmsjacket.StartSMSService" >
         </service>
 
