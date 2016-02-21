@@ -11,10 +11,12 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.ActionBar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Dialog_Input_MandorID extends AppCompatActivity {
     private SharedPreferences spf;
@@ -37,10 +39,23 @@ public class Dialog_Input_MandorID extends AppCompatActivity {
         btn_positive.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
-                spf.edit().putString(Parameter_Collections.SH_ID_MANDOR, ed_mandor_id.getText().toString()).commit();
-                spf.edit().putBoolean(Parameter_Collections.SH_MANDOR_INPUTED, true).commit();
-                spf.edit().putBoolean(Parameter_Collections.SH_lOGGED, true).commit();
-                setResult(RESULT_OK);
+
+//                spf.edit().putString(Parameter_Collections.SH_ID_MANDOR, ed_mandor_id.getText().toString()).commit();
+//                spf.edit().putBoolean(Parameter_Collections.SH_MANDOR_INPUTED, true).commit();
+//                spf.edit().putBoolean(Parameter_Collections.SH_lOGGED, true).commit();
+//                setResult(RESULT_OK);
+//                finish();
+
+                String message = "checkmason#" + ed_mandor_id.getText().toString();
+                boolean sms_sent = Public_Functions.sendSMS(message);
+                Log.e("SMS SENT", message);
+
+                if(sms_sent){
+                    spf.edit().putBoolean(Parameter_Collections.SH_WAITING_VALIDATION, true).commit();
+                    Toast.makeText(getApplicationContext(), "Kami akan validasi Mason Id anda...", Toast.LENGTH_LONG).show();
+                }else{
+                    Toast.makeText(getApplicationContext(),"Sms validasi Mason Id anda gagal, Coba lagi", Toast.LENGTH_LONG).show();
+                }
                 finish();
             }
         });

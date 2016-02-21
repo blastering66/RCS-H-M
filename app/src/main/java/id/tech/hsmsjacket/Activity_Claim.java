@@ -3,6 +3,7 @@ package id.tech.hsmsjacket;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -10,13 +11,21 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
 
 import id.tech.orm_sugar.SLite;
 
@@ -24,15 +33,18 @@ import id.tech.orm_sugar.SLite;
  * Created by RebelCreative-A1 on 15/01/2016.
  */
 public class Activity_Claim extends AppCompatActivity {
-    private EditText ed_Retailer, ed_Qty;
+    private EditText ed_Qty;
+    private AutoCompleteTextView ed_Retailer;
     private String mRetailer, mQty, mMandorId;
     private Button btn_Claim;
     private SharedPreferences spf;
+    private ArrayAdapter<String> adapter;
+    private List<String> data_retailercode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_claim);
+        setContentView(R.layout.activity_claim_new);
 
         ImageView img_Back = (ImageView)findViewById(R.id.btn_back);
         img_Back.setOnClickListener(new View.OnClickListener() {
@@ -45,8 +57,32 @@ public class Activity_Claim extends AppCompatActivity {
         ActionBar ac = getSupportActionBar();
         ac.hide();
 
-        ed_Retailer = (EditText)findViewById(R.id.ed_retailer_code);
+        data_retailercode = new ArrayList<>();
+        SQLiteDatabase db = SLite.openDatabase(this);
+//        final Cursor c = db.rawQuery("SELECT * FROM tbl_sms",new String[] {} );
+        final Cursor c = db.query("tbl_sms", new String[] {"confirmCode", "retailerId"},null, null, null, null,"dateReceived DESC", null);
+
+        while (c.moveToNext()) {
+            Log.e("Hasil Query", c.getString(0) + " & " + c.getString(1));
+            if(c.getString(0).equals("2")){
+
+                data_retailercode.add(c.getString(1));
+                Log.e("Add Data", c.getString(1));
+
+            }
+        }
+
+        c.close();
+        db.close();
+
+        List<String> newList = new ArrayList<>(new LinkedHashSet(data_retailercode));
+
+        adapter = new ArrayAdapter<String>(this,android.R.layout.select_dialog_item, newList);
+
+        ed_Retailer = (AutoCompleteTextView)findViewById(R.id.ed_retailer_code);
         EditText ed_MandorId = (EditText)findViewById(R.id.ed_id_mandor);
+
+        ed_Retailer.setAdapter(adapter);
 
         spf = getSharedPreferences(Parameter_Collections.SH_NAME, Context.MODE_PRIVATE);
         mMandorId = spf.getString(Parameter_Collections.SH_ID_MANDOR, "0");

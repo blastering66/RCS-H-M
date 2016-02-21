@@ -84,7 +84,7 @@ public class SmsListener extends BroadcastReceiver {
                                     cv.put("masonId", cMandorId);
                                     cv.put("trxId", trxId);
 
-                                    SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                    SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                     String date_now = df.format(Calendar.getInstance().getTime());
 
                                     cv.put("dateReceived", date_now);
@@ -119,6 +119,28 @@ public class SmsListener extends BroadcastReceiver {
 
                                 }
 
+                            }else if(msgBody.contains("MasonId")){
+                                Log.e("SMS validasi", "Mason");
+
+                                if(msgBody.contains("tidak")){
+                                    //tidak berhasil
+                                    Log.e("Mason Id = ", "Tidak Valid");
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_WAITING_VALIDATION, false).commit();
+                                }else{
+                                    int loc_MasonId = msgBody.indexOf("MasonId ");
+                                    String mason_id = msgBody.substring(loc_MasonId + 8, loc_MasonId + 17);
+                                    Log.e("Mason Id = ", mason_id);
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_WAITING_VALIDATION, false).commit();
+
+                                    sharedPreferences.edit().putString(Parameter_Collections.SH_ID_MANDOR, mason_id).commit();
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_MANDOR_INPUTED, true).commit();
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_lOGGED, true).commit();
+
+                                    Intent load_MenuUtama = new Intent(context, Activity_Home.class);
+                                    context.startActivity(load_MenuUtama);
+
+                                }
+
                             } else if(msgBody.contains("Konfirmasi")){
 
                                 if(msgBody.contains("Berhasil")){
@@ -143,7 +165,7 @@ public class SmsListener extends BroadcastReceiver {
                                 ContentValues cv = new ContentValues();
                                 cv.put("senderId", msg_from);
                                 cv.put("bodyMessage", msgBody);
-                                SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                 String date_now = df.format(Calendar.getInstance().getTime());
                                 cv.put("dateReceived", date_now);
                                 cv.put("viewed", "0");
@@ -156,7 +178,7 @@ public class SmsListener extends BroadcastReceiver {
                                 ContentValues cv = new ContentValues();
                                 cv.put("senderId", msg_from);
                                 cv.put("bodyMessage", msgBody);
-                                SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                 String date_now = df.format(Calendar.getInstance().getTime());
                                 cv.put("dateReceived", date_now);
                                 cv.put("viewed", "0");
@@ -172,7 +194,7 @@ public class SmsListener extends BroadcastReceiver {
                                 cv.put("masonId", "0");
                                 cv.put("trxId", "0");
 
-                                SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                 String date_now = df.format(Calendar.getInstance().getTime());
 
                                 cv.put("dateReceived", date_now);
@@ -222,7 +244,7 @@ public class SmsListener extends BroadcastReceiver {
                                     cv.put("masonId", cMandorId);
                                     cv.put("trxId", trxId);
 
-                                    SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                    SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                     String date_now = df.format(Calendar.getInstance().getTime());
 
                                     cv.put("dateReceived", date_now);
@@ -276,12 +298,33 @@ public class SmsListener extends BroadcastReceiver {
                                     db.close();
                                 }
 
-                            }else if(patokanNews.equals("ama")){
+                            }else if(msgBody.contains("MasonId")){
+                                Log.e("SMS validasi", "Mason");
+
+                                if(msgBody.contains("tidak")){
+                                    //tidak berhasil
+                                    Log.e("Mason Id = ", "Tidak Valid");
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_WAITING_VALIDATION, false).commit();
+                                }else{
+                                    int loc_MasonId = msgBody.indexOf("MasonId ");
+                                    String mason_id = msgBody.substring(loc_MasonId + 8, loc_MasonId + 17);
+                                    Log.e("Mason Id = ", mason_id);
+                                    sharedPreferences.edit().putString(Parameter_Collections.SH_ID_MANDOR, mason_id).commit();
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_MANDOR_INPUTED, true).commit();
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_lOGGED, true).commit();
+                                    sharedPreferences.edit().putBoolean(Parameter_Collections.SH_WAITING_VALIDATION, false).commit();
+
+                                    Intent load_MenuUtama = new Intent(context, Activity_Home.class);
+                                    context.startActivity(load_MenuUtama);
+
+                                }
+
+                            } else if(patokanNews.equals("ama")){
                                 SQLiteDatabase db = SLite.openDatabase(context);
                                 ContentValues cv = new ContentValues();
                                 cv.put("senderId", msg_from);
                                 cv.put("bodyMessage", msgBody);
-                                SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                 String date_now = df.format(Calendar.getInstance().getTime());
                                 cv.put("dateReceived", date_now);
                                 cv.put("viewed", "0");
@@ -294,7 +337,7 @@ public class SmsListener extends BroadcastReceiver {
                                 ContentValues cv = new ContentValues();
                                 cv.put("senderId", msg_from);
                                 cv.put("bodyMessage", msgBody);
-                                SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                 String date_now = df.format(Calendar.getInstance().getTime());
                                 cv.put("dateReceived", date_now);
                                 cv.put("viewed", "0");
@@ -310,7 +353,7 @@ public class SmsListener extends BroadcastReceiver {
                                 cv.put("masonId", "0");
                                 cv.put("trxId", "0");
 
-                                SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
+                                SimpleDateFormat df = new SimpleDateFormat("hh:mm aaa dd MMM yyyy");
                                 String date_now = df.format(Calendar.getInstance().getTime());
 
                                 cv.put("dateReceived", date_now);

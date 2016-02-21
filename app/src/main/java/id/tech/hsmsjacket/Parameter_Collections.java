@@ -14,6 +14,7 @@ public class Parameter_Collections {
     public static final String SH_NAME = "mandor_sh";
     public static final String SH_ID_MANDOR = "mandor_id";
     public static final String SH_lOGGED= "logged";
+    public static final String SH_WAITING_VALIDATION= "validating";
     public static final String SH_ID_RETAILER = "retailer_id";
     public static final String SH_QTY = "qty";
     public static final String SH_MANDOR_INPUTED = "mandor_inputed";

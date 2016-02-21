@@ -1,5 +1,6 @@
 package id.tech.hsmsjacket;
 
+import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -30,7 +31,15 @@ public class Activity_PreHome extends AppCompatActivity {
         btn_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivityForResult(new Intent(getApplicationContext(), Dialog_Input_MandorID.class),111);
+                boolean isValidating = getSharedPreferences(Parameter_Collections.SH_NAME, Context.MODE_PRIVATE)
+                        .getBoolean(Parameter_Collections.SH_WAITING_VALIDATION, false);
+                if(isValidating){
+                    Toast.makeText(getApplicationContext(), "Masih Menunggu SMS Validasi dari sistem", Toast.LENGTH_LONG).show();
+                }else{
+                    startActivityForResult(new Intent(getApplicationContext(), Dialog_Input_MandorID.class),111);
+                }
+
+//                startActivityForResult(new Intent(getApplicationContext(), Dialog_Input_MandorID.class),111);
 
             }
         });
