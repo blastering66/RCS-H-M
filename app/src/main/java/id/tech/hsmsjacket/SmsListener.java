@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.Message;
 import android.provider.Telephony;
 import android.telephony.SmsMessage;
 import android.transition.Slide;
@@ -36,12 +37,23 @@ public class SmsListener extends BroadcastReceiver {
                 try {
                     Object[] pdus = (Object[]) bundle.get("pdus");
                     msgs = new SmsMessage[pdus.length];
+
+                    StringBuffer content_buff = new StringBuffer();
                     for (int i = 0; i < msgs.length; i++) {
                         msgs[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-                        msg_from = msgs[i].getOriginatingAddress();
-                        final String msgBody = msgs[i].getMessageBody();
-                        Log.e("Mandor SMS from = ", msg_from);
-                        Log.e("Mandor SMS message = ", msgBody);
+                        String msgBody = msgs[i].getMessageBody();
+                        content_buff.append(msgBody);
+                    }
+                    String msgBody = content_buff.toString();
+                    msg_from = msgs[0].getOriginatingAddress();
+
+//                        StringBuffer content_buff = new StringBuffer();
+//                        for(SmsMessage sms:msgs){
+//                            content_buff.append(sms.getMessageBody());
+//                        }
+//                        final String msgBody = content_buff.toString();
+                        Log.e("Mandor SMS from = ",  msg_from);
+                        Log.e("Mandor SMS message = ",msgBody);
                         String cMandorId = sharedPreferences.getString(Parameter_Collections.SH_ID_MANDOR, "0");
 
                         if (msg_from.equals(Parameter_Collections.nomer_holcim) ||
@@ -366,7 +378,7 @@ public class SmsListener extends BroadcastReceiver {
 
 
                         }
-                    }
+
 
 
 
