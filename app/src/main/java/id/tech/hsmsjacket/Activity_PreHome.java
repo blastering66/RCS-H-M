@@ -49,7 +49,7 @@ public class Activity_PreHome extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (resultCode){
             case RESULT_OK:
-                startActivity(new Intent(getApplicationContext(), Activity_Home.class));
+//                startActivity(new Intent(getApplicationContext(), Activity_Home.class));
                 finish();
                 break;
             case RESULT_CANCELED:

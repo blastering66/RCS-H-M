@@ -56,6 +56,7 @@ public class Dialog_Input_MandorID extends AppCompatActivity {
                 }else{
                     Toast.makeText(getApplicationContext(),"Sms validasi Mason Id anda gagal, Coba lagi", Toast.LENGTH_LONG).show();
                 }
+                setResult(RESULT_OK);
                 finish();
             }
         });

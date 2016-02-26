@@ -149,6 +149,7 @@ public class SmsListener extends BroadcastReceiver {
                                     sharedPreferences.edit().putBoolean(Parameter_Collections.SH_lOGGED, true).commit();
 
                                     Intent load_MenuUtama = new Intent(context, Activity_Home.class);
+                                    load_MenuUtama.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                     context.startActivity(load_MenuUtama);
 
                                 }
