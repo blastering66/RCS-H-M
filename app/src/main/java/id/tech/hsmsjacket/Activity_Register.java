@@ -47,6 +47,8 @@ public class Activity_Register extends AppCompatActivity {
                 mkota = ed_Kota.getText().toString();
                 mRetailer = ed_Retailer.getText().toString();
 
+                //validasi
+
                 if(mkota.equals("") || mkota.isEmpty() ){
                     ed_Kota.setError("Masukan Nama Kota");
                 }else if(mNama.equals("") ||mNama.isEmpty()){
@@ -86,6 +88,8 @@ public class Activity_Register extends AppCompatActivity {
             }catch (Exception e){
 
             }
+
+            //format daftar mason ke retailer
             String message = "DAFTAR#" + mRetailer + "#" + mNama + "#" + mkota;
             sms_sent = Public_Functions.sendSMS(message);
             return null;

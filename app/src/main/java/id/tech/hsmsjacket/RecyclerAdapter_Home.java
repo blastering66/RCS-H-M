@@ -39,13 +39,12 @@ public class RecyclerAdapter_Home extends RecyclerView.Adapter<RecyclerAdapter_H
 
         spf = context_adapter.getSharedPreferences(Parameter_Collections.SH_NAME, Context.MODE_PRIVATE);
 
-//        final Cursor c = db.rawQuery("SELECT * FROM tbl_sms",new String[] {} );
+        //Query SQL lokal untuk dapatnya Count yg belum dibaca
         final Cursor c = db.query("tbl_sms_inbox", new String[] {"viewed"}
                 ,null, null, null, null,null, null);
         int total_inbox_unread = 0;
 
         while(c.moveToNext()){
-//            jika pending maka masukan ke data
             if(c.getString(0).equals("0")){
                 total_inbox_unread++;
             }
@@ -57,7 +56,6 @@ public class RecyclerAdapter_Home extends RecyclerView.Adapter<RecyclerAdapter_H
         int total_news_unread = 0;
 
         while(c2.moveToNext()){
-//            jika pending maka masukan ke data
             if(c2.getString(0).equals("0")){
                 total_news_unread++;
             }
@@ -69,13 +67,13 @@ public class RecyclerAdapter_Home extends RecyclerView.Adapter<RecyclerAdapter_H
         int total_insentive_unread = 0;
 
         while(c3.moveToNext()){
-//            jika pending maka masukan ke data
             if(c3.getString(0).equals("0")){
                 total_insentive_unread++;
             }
 
         }
 
+        // tampilkan Count SMS yg blum dibaca di menu tertentu saja
         switch (position){
             case 0:
                 holder.tv_total_unread_sms.setText(String.valueOf(total_inbox_unread));
@@ -97,12 +95,8 @@ public class RecyclerAdapter_Home extends RecyclerView.Adapter<RecyclerAdapter_H
                 break;
         }
 
-//        if(position != 0){
-//            holder.tv_total_unread_sms.setVisibility(View.GONE);
-//        }else{
-//            holder.tv_total_unread_sms.setText(String.valueOf(total_inbox_unread));
-//        }
 
+        // Set Image Menu dan Klik Activity dari menu masing2
         switch (position){
             case 0:
                 holder.img.setImageResource(R.drawable.img_item_inbox);
@@ -131,7 +125,6 @@ public class RecyclerAdapter_Home extends RecyclerView.Adapter<RecyclerAdapter_H
                 holder.img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-//                        Intent intent = new Intent(context_adapter, Activity_History_Parent.class);
                         Intent intent = new Intent(context_adapter, Activity_History_Tabpager.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         context_adapter.startActivity(intent);

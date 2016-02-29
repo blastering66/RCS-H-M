@@ -72,11 +72,11 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         String date_now = df.format(Calendar.getInstance().getTime());
 
         tv_tgl.setText(" --- " + childData.dateArrived + " --- ");
-
         tv_mason_id.setText(childData.tv_mason_id);
-
         tv_transaction_id.setText(childData.tv_transaction_id);
         tv_qty.setText(childData.tv_qty);
+
+        //set informasi status
         if(childData.tv_status.equals("1")){
             tv_status.setText("Menunggu konfirmasi");
             tv_status.setTextColor(Color.BLUE);
@@ -84,7 +84,6 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
             tv_status.setText("Terkonfirmasi");
             tv_status.setTextColor(Color.GREEN);
         }
-
 
         sh.edit().putString("tgl_now", date_current).commit();
         return convertView;

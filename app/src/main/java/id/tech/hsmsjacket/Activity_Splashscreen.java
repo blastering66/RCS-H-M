@@ -30,6 +30,7 @@ public class Activity_Splashscreen extends AppCompatActivity {
 
         @Override
         protected Void doInBackground(Void... params) {
+            //SImulasi proses background
             try{
                 Thread.sleep(3000);
 
@@ -37,10 +38,13 @@ public class Activity_Splashscreen extends AppCompatActivity {
 
             }
 
+
+            //Create DB dan Table2nya
             SQLiteDatabase db = SLite.openDatabase(getApplicationContext());
             SLite.process_CreateIfExist_Table_Sms(db);
             db.close();
 
+            //Jalankan SMS Service
             Intent notif_service = new Intent(context, StartSMSService.class);
             notif_service.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             notif_service.addFlags(Intent.FLAG_RECEIVER_NO_ABORT);
@@ -56,6 +60,8 @@ public class Activity_Splashscreen extends AppCompatActivity {
 
             boolean isLogged = context.getSharedPreferences(Parameter_Collections.SH_NAME, Context.MODE_PRIVATE)
                     .getBoolean(Parameter_Collections.SH_lOGGED, false);
+
+            //Cek apakah sudah pernah Login
             if(isLogged){
                 startActivity(new Intent(context, Activity_Home.class));
                 finish();

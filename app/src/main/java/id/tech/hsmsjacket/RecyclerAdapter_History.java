@@ -66,13 +66,6 @@ public class RecyclerAdapter_History extends RecyclerView.Adapter<RecyclerAdapte
         holder.wrapper.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(context_adapter, Dialog_Konfirmasi_Transaksi.class);
-//                Intent intent = new Intent(context_adapter, Activity_History_Detail.class);
-//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                intent.putExtra("tv_transaction_id", item.tv_transaction_id);
-//                intent.putExtra("tv_mason_id",item.tv_mason_id);
-//                intent.putExtra("tv_qty",item.tv_qty);
-//                context_adapter.startActivity(intent);
             }
         });
 

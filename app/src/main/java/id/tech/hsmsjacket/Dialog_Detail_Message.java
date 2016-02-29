@@ -15,9 +15,6 @@ public class Dialog_Detail_Message extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ActionBar ac = getSupportActionBar();
-//        ac.hide();
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_detail_sms);
 
         String cSender = getIntent().getStringExtra("sender");

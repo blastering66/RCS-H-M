@@ -46,9 +46,8 @@ public class Activity_News extends AppCompatActivity {
         data = new ArrayList<>();
 
 
-
+//Query data News
         SQLiteDatabase db = SLite.openDatabase(getApplicationContext());
-//        final Cursor c = db.rawQuery("SELECT * FROM tbl_sms",new String[] {} );
         final Cursor c = db.query("tbl_sms_news", new String[] {"senderId", "bodyMessage", "dateReceived","viewed", "id"}
                 ,null, null, null, null,"dateReceived DESC", null);
 

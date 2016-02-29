@@ -28,8 +28,6 @@
         <activity android:name=".Activity_Register" android:screenOrientation="portrait"  ></activity>
         <activity android:name=".Activity_Claim" android:screenOrientation="portrait"></activity>
         <activity android:name=".Activity_Insentif" android:screenOrientation="portrait"></activity>
-        <activity android:name=".Activity_History" android:screenOrientation="portrait"></activity>
-        <activity android:name=".Activity_History_Parent" android:screenOrientation="portrait"></activity>
         <activity android:name=".Activity_History_Tabpager" android:screenOrientation="portrait"></activity>
         <activity android:name=".Activity_News" android:screenOrientation="portrait"></activity>
 

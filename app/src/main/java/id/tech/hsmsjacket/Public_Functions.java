@@ -8,6 +8,7 @@ import android.util.Log;
  */
 public class Public_Functions {
 
+    //method mengirim sms
     public static boolean sendSMS(String message) {
         try {
             SmsManager smsManager = SmsManager.getDefault();

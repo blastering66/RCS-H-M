@@ -28,7 +28,6 @@ public class Activity_Home extends AppCompatActivity {
         rv = (RecyclerView)findViewById(R.id.rv);
         layoutManager = new GridLayoutManager(getApplicationContext(),2);
 
-//        layoutManager = new LinearLayoutManager(getApplicationContext(), 1, false);
         adapter = new RecyclerAdapter_Home(this,getApplicationContext());
         rv.setLayoutManager(layoutManager);
         rv.setAdapter(adapter);

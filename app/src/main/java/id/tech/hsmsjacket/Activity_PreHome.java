@@ -31,6 +31,8 @@ public class Activity_PreHome extends AppCompatActivity {
         btn_input.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                //Cek apakah sdh diterima sms validasi
                 boolean isValidating = getSharedPreferences(Parameter_Collections.SH_NAME, Context.MODE_PRIVATE)
                         .getBoolean(Parameter_Collections.SH_WAITING_VALIDATION, false);
                 if(isValidating){
@@ -38,8 +40,6 @@ public class Activity_PreHome extends AppCompatActivity {
                 }else{
                     startActivityForResult(new Intent(getApplicationContext(), Dialog_Input_MandorID.class),111);
                 }
-
-//                startActivityForResult(new Intent(getApplicationContext(), Dialog_Input_MandorID.class),111);
 
             }
         });

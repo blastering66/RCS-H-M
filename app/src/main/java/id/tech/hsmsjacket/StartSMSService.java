@@ -30,13 +30,12 @@ public class StartSMSService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         myIntent = intent;
+
+        //jalankan SMS Listener tiap 30mnt menghindari dimatikan oleh system
         Calendar c = Calendar.getInstance();
         activate = new Intent(StartSMSService.this, SmsListener.class);
-
         activate.putExtra("code", "1");
-
         alarmIntent = PendingIntent.getBroadcast(getApplicationContext(), 111, activate,PendingIntent.FLAG_CANCEL_CURRENT);
-
         alarams = (AlarmManager)getSystemService(ALARM_SERVICE);
         alarams.setRepeating(AlarmManager.RTC_WAKEUP, c.getTimeInMillis(),
                 1000 * 60 * 30, alarmIntent);

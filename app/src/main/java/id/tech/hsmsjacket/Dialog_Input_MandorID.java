@@ -24,9 +24,6 @@ public class Dialog_Input_MandorID extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        ActionBar ac = getSupportActionBar();
-//        ac.hide();
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_input_mandor_id);
 
         spf = getSharedPreferences(Parameter_Collections.SH_NAME, Context.MODE_PRIVATE);
@@ -40,16 +37,12 @@ public class Dialog_Input_MandorID extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                spf.edit().putString(Parameter_Collections.SH_ID_MANDOR, ed_mandor_id.getText().toString()).commit();
-//                spf.edit().putBoolean(Parameter_Collections.SH_MANDOR_INPUTED, true).commit();
-//                spf.edit().putBoolean(Parameter_Collections.SH_lOGGED, true).commit();
-//                setResult(RESULT_OK);
-//                finish();
-
+                //Kirim sms untuk cek mason dgn formatnya
                 String message = "checkmason#" + ed_mandor_id.getText().toString();
                 boolean sms_sent = Public_Functions.sendSMS(message);
                 Log.e("SMS SENT", message);
 
+                //Cek jika berhasil dikirim sms
                 if(sms_sent){
                     spf.edit().putBoolean(Parameter_Collections.SH_WAITING_VALIDATION, true).commit();
                     Toast.makeText(getApplicationContext(), "Kami akan validasi Mason Id anda...", Toast.LENGTH_LONG).show();
@@ -64,6 +57,7 @@ public class Dialog_Input_MandorID extends AppCompatActivity {
         btn_negative.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                //User Cancel input
                 setResult(RESULT_CANCELED);
                 spf.edit().clear().commit();
                 finish();

@@ -51,6 +51,7 @@ public class Activity_History_Tabpager extends AppCompatActivity implements Mate
             }
         });
 
+        //Menambah jenis Tab
         tabHost.addTab(tabHost.newTab().setText("MENUNGGU").setTabListener(this));
         tabHost.addTab(tabHost.newTab().setText("BERHASIL").setTabListener(this));
     }

@@ -46,6 +46,7 @@ public class Activity_Claim extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_claim_new);
 
+        //Custom ActionBar
         ImageView img_Back = (ImageView)findViewById(R.id.btn_back);
         img_Back.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -53,7 +54,6 @@ public class Activity_Claim extends AppCompatActivity {
                 finish();
             }
         });
-
         ActionBar ac = getSupportActionBar();
         ac.hide();
 
@@ -84,6 +84,7 @@ public class Activity_Claim extends AppCompatActivity {
 
         ed_Retailer.setAdapter(adapter);
 
+        //Get Mandor ID
         spf = getSharedPreferences(Parameter_Collections.SH_NAME, Context.MODE_PRIVATE);
         mMandorId = spf.getString(Parameter_Collections.SH_ID_MANDOR, "0");
         ed_MandorId.setHint("Mandor ID = " + mMandorId);
@@ -96,6 +97,7 @@ public class Activity_Claim extends AppCompatActivity {
                 mRetailer = ed_Retailer.getText().toString();
                 mQty = ed_Qty.getText().toString();
 
+                //validasi
                 if(mRetailer.equals("") || mRetailer.isEmpty()){
                     ed_Retailer.setError("Harap Isi Retailer Code");
                 }else if(mQty.equals("") || mQty.isEmpty()){
@@ -106,34 +108,7 @@ public class Activity_Claim extends AppCompatActivity {
                     }
 
                 }else{
-//                    SQLiteDatabase db = SLite.openDatabase(getApplicationContext());
-//                    ContentValues cv = new ContentValues();
-//                    cv.put("senderId", "");
-//                    cv.put("bodyMessage", "");
-//                    cv.put("confirmCode", "1");
-//                    cv.put("masonId", mMandorId);
-//                    cv.put("trxId", "");
-//
-//                    SimpleDateFormat df = new SimpleDateFormat("dd MMM yyyy");
-//                    String date_now = df.format(Calendar.getInstance().getTime());
-//
-//                    cv.put("dateReceived", date_now);
-//                    cv.put("qty", ed_Qty.getText().toString());
-//                    cv.put("viewed", "0");
-//                    cv.put("retailerId", ed_Retailer.getText().toString());
-//
-//                    spf.edit().putString(Parameter_Collections.SH_ID_RETAILER, ed_Retailer.getText().toString()).commit();
-//                    spf.edit().putString(Parameter_Collections.SH_QTY, ed_Qty.getText().toString()).commit();
-//
-//                    Log.e("masonId", mMandorId);
-//                    Log.e("trxId", "");
-//                    Log.e("qty", ed_Qty.getText().toString());
-//                    Log.e("retailerId",  ed_Retailer.getText().toString());
-//
-//                    db.insert("tbl_sms", null, cv);
-//                    db.close();
-//                    Log.e("Sms Holcim Claim", "Inputed to DB");
-
+                    //eksekusi proses claim
                     new AsyncTask_Claim().execute();
                 }
 
@@ -148,17 +123,20 @@ public class Activity_Claim extends AppCompatActivity {
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            //show dialog progress
             pDialog = new DialogFragmentProgress();
             pDialog.show(getSupportFragmentManager(), "");
         }
 
         @Override
         protected Boolean doInBackground(Void... params) {
+            //simulasi proses
             try{
                 Thread.sleep(3000);
             }catch (Exception e){
 
             }
+            //format claim
             String mesage = "SH#" +mRetailer +"#"+ mMandorId + "#" + mQty;
             return Public_Functions.sendSMS(mesage);
         }
@@ -166,6 +144,7 @@ public class Activity_Claim extends AppCompatActivity {
         @Override
         protected void onPostExecute(Boolean b) {
             super.onPostExecute(b);
+            //dismiss dialog progress
             pDialog.dismiss();
             if(b){
                 Toast.makeText(getApplicationContext(), "Clam berhasil dikirim, Toko akan memvalidasi claim anda", Toast.LENGTH_LONG).show();

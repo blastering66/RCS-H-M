@@ -40,6 +40,7 @@ public class Activity_History_Expandable_Confirmed extends Fragment {
         dataHeader = new ArrayList<>();
         dataChild = new HashMap<String, List<RowData_History>>();
 
+        //penambahan Title Header
         dataHeader.add("Hari ini");
         dataHeader.add("Kemarin");
         dataHeader.add("Lainnya");
@@ -48,6 +49,7 @@ public class Activity_History_Expandable_Confirmed extends Fragment {
         List<RowData_History> data_yesterday = new ArrayList<>();
         List<RowData_History> data_else = new ArrayList<>();
 
+        //Query dtabase lokal
         sh = getActivity().getSharedPreferences("sh_sms", Context.MODE_PRIVATE);
         SQLiteDatabase db = SLite.openDatabase(getActivity());
 //        final Cursor c = db.rawQuery("SELECT * FROM tbl_sms",new String[] {} );
@@ -72,6 +74,8 @@ public class Activity_History_Expandable_Confirmed extends Fragment {
 
             boolean isYesterday = false;
             boolean isToday = false;
+
+            //cek apakah hari ini, kmrin, atau sebelum2nya
             if (c1.get(Calendar.YEAR) == c2.get(Calendar.YEAR)
                     && c1.get(Calendar.DAY_OF_YEAR) == c2.get(Calendar.DAY_OF_YEAR)) {
                 isYesterday = true;

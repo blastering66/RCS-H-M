@@ -14,6 +14,7 @@ public class BootCompletedReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         this.context = context;
 
+        //beri jeda 30dtk sebelum menjalanan SMS Service
         try{
             Thread.sleep(30000);
         }catch (InterruptedException e) {
